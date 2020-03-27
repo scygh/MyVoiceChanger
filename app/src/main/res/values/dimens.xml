@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textSizeNomal">14sp</dimen>
+
+    <dimen name="height_70">70dp</dimen>
+    <dimen name="height_100">100dp</dimen>
+    <dimen name="height_120">120dp</dimen>
+    <dimen name="height_180">180dp</dimen>
+    <dimen name="height_200">200dp</dimen>
+    <dimen name="width_70">70dp</dimen>
+    <dimen name="width_100">100dp</dimen>
+    <dimen name="width_120">120dp</dimen>
+
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+</resources>
