@@ -1,14 +1,20 @@
 package com.scy.myvoicechanger.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -42,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
     private List<MainRvBean> mainRvBeans = new ArrayList<>();
     private int currentPosiotion = 1;
 
+
     private static final int HANDLER_WHAT_ONE = 1;
+    private static final int REQUEST_CODE_ONE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
         initMainRv();
         initMainVp();
     }
+
+    float startX = 0;
+    float startY = 0;
+    float endX = 0;
+    float endY = 0;
 
     private void initMainVp() {
         List<View> views = new ArrayList<>();
@@ -85,6 +98,34 @@ public class MainActivity extends AppCompatActivity {
                 } else if (currentPosiotion == 4) {
                     mainVp.setCurrentItem(1, false);
                 }
+            }
+        });
+        mainVp.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startX = motionEvent.getX();
+                        startY = motionEvent.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        float offsetX = motionEvent.getX() - startX;
+                        float offsetY = motionEvent.getY() - startY;
+                        if (Math.abs(offsetX) <= 5) {
+                            if (currentPosiotion == 1) {
+                                startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), REQUEST_CODE_ONE);
+                                Toast.makeText(MainActivity.this, "1", Toast.LENGTH_SHORT).show();
+                            } else if (currentPosiotion == 2) {
+                                Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
+                            } else if (currentPosiotion == 3) {
+                                Toast.makeText(MainActivity.this, "3", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        break;
+                }
+                return false;
             }
         });
         handler.sendEmptyMessageDelayed(HANDLER_WHAT_ONE, 2000);
@@ -130,6 +171,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode) {
+            case 1:
+                Toast.makeText(this, "打开成功", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     protected void onDestroy() {
