@@ -55,5 +55,18 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/main_fab"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:fabCustomSize="50dp"
+        app:layout_anchorGravity="bottom"
+        android:layout_margin="@dimen/margin_20"
+        app:layout_anchor="@id/main_appBar"
+        android:src="@drawable/main_floatactionbutton_bg"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

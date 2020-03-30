@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,16 +21,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.scy.myvoicechanger.R;
 import com.scy.myvoicechanger.adapter.MainRvAdapter;
 import com.scy.myvoicechanger.adapter.MainVpAdapter;
 import com.scy.myvoicechanger.entity.MainRvBean;
+import com.scy.myvoicechanger.service.FloatWindowService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     Toolbar mainToolbar;
     @BindView(R.id.main_collapsing_toolbar)
     CollapsingToolbarLayout mainCollapsingToolbar;
+    @BindView(R.id.main_fab)
+    FloatingActionButton mainFab;
     private MainRvAdapter mainRvAdapter;
     private List<MainRvBean> mainRvBeans = new ArrayList<>();
     private int currentPosiotion = 1;
@@ -186,5 +190,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+    }
+
+    @OnClick(R.id.main_fab)
+    public void onViewClicked(View view) {
+        switch(view.getId()) {
+            case R.id.main_fab:
+                Intent intent = new Intent(this, FloatWindowService.class);
+                startService(intent);
+                finish();
+                break;
+        }
     }
 }
