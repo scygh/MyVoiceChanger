@@ -2,6 +2,7 @@ package com.scy.myvoicechanger.service;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.view.Gravity;
 import android.view.WindowManager;
@@ -88,20 +89,30 @@ public class MyWindowManager {
      */
     public static void createBigWindow(Context context) {
         WindowManager windowManager = getWindowManager(context);
-        int screenWidth = windowManager.getDefaultDisplay().getWidth();
-        int screenHeight = windowManager.getDefaultDisplay().getHeight();
+        int screenWidth;
+        int screenHeight;
+        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            screenWidth = windowManager.getDefaultDisplay().getHeight();
+            screenHeight = windowManager.getDefaultDisplay().getWidth();
+        } else {
+            screenWidth = windowManager.getDefaultDisplay().getWidth();
+            screenHeight = windowManager.getDefaultDisplay().getHeight();
+        }
+
         if (bigWindow == null) {
             bigWindow = new FloatWindowBigView(context);
             if (bigWindowParams == null) {
                 bigWindowParams = new WindowManager.LayoutParams();
-                bigWindowParams.x = screenWidth / 2 - FloatWindowBigView.viewWidth / 2;
-                bigWindowParams.y = screenHeight / 2 - FloatWindowBigView.viewHeight / 2;
+                bigWindowParams.x = screenWidth;
+                bigWindowParams.y = 0;
                 bigWindowParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+                bigWindowParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
                 bigWindowParams.format = PixelFormat.RGBA_8888;
                 bigWindowParams.gravity = Gravity.LEFT | Gravity.TOP;
                 bigWindowParams.width = FloatWindowBigView.viewWidth;
                 bigWindowParams.height = FloatWindowBigView.viewHeight;
             }
+            bigWindow.setParams(bigWindowParams);
             windowManager.addView(bigWindow, bigWindowParams);
         }
     }

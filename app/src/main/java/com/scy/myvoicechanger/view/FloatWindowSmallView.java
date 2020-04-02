@@ -23,7 +23,6 @@ public class FloatWindowSmallView extends LinearLayout {
 
     public static int viewWidth;
     public static int viewHeight;
-    private static int statusBarheight;
     private WindowManager windowManager;
     private WindowManager.LayoutParams mParams;
     private float xInScreen;

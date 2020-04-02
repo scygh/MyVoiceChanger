@@ -1,4 +1,4 @@
-package com.scy.myvoicechanger.view;
+package com.scy.myvoicechanger;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -22,7 +22,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.scy.myvoicechanger.R;
 import com.scy.myvoicechanger.adapter.MainRvAdapter;
 import com.scy.myvoicechanger.adapter.MainVpAdapter;
 import com.scy.myvoicechanger.entity.MainRvBean;
@@ -34,6 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.scy.myvoicechanger.utils.SpeechUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int HANDLER_WHAT_ONE = 1;
     private static final int REQUEST_CODE_ONE = 1;
-
+    SpeechUtils speechUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         mainCollapsingToolbar.setTitle("使用方法");
         initMainRv();
         initMainVp();
+        speechUtils = SpeechUtils.getInstance(getApplicationContext());
+        speechUtils.speakText("你好啊");
     }
 
     float startX = 0;
@@ -190,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+        speechUtils.shotdown();
     }
 
     @OnClick(R.id.main_fab)

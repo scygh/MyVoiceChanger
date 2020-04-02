@@ -26,9 +26,16 @@ public class FloatWindowBigView extends LinearLayout {
 
     public static int viewWidth;
     public static int viewHeight;
+    private WindowManager windowManager;
+    private WindowManager.LayoutParams mParams;
+    private float xInScreen;
+    private float yInScreen;
+    private float xInView;
+    private float yInView;
 
     public FloatWindowBigView(Context context) {
         super(context);
+        windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         LayoutInflater.from(context).inflate(R.layout.float_window_detail, this);
         View view = findViewById(R.id.big_window_layout);
         viewWidth = view.getLayoutParams().width;
@@ -54,6 +61,57 @@ public class FloatWindowBigView extends LinearLayout {
             }
         });
 
+    }
+
+    public void setParams(WindowManager.LayoutParams params) {
+        mParams = params;
+    }
+
+    private void updateViewPosition() {
+        mParams.x = (int) (xInScreen - xInView);
+        mParams.y = (int) (yInScreen - yInView);
+        windowManager.updateViewLayout(this, mParams);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                xInView = event.getX();
+                yInView = event.getY();
+                xInScreen = event.getRawX();
+                yInScreen = event.getRawY() - getStatusBarHeight();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                xInScreen = event.getRawX();
+                yInScreen = event.getRawY() - getStatusBarHeight();
+                // 手指移动的时候更新小悬浮窗的位置
+                updateViewPosition();
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            default:
+                break;
+        }
+        return false;
+
+    }
+
+    int statusBarHeight;
+
+    private int getStatusBarHeight() {
+        if (statusBarHeight == 0) {
+            try {
+                Class<?> c = Class.forName("com.android.internal.R$dimen");
+                Object o = c.newInstance();
+                Field field = c.getField("status_bar_height");
+                int x = (Integer) field.get(o);
+                statusBarHeight = getResources().getDimensionPixelSize(x);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return statusBarHeight;
     }
 
 
