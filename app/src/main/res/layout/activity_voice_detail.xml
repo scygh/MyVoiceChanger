@@ -1,42 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".MainActivity">
+    android:background="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/main_appBar"
+        android:id="@+id/detail_appBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_180">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/main_collapsing_toolbar"
+            android:id="@+id/detail_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentScrim="@color/white"
             android:background="@color/white"
-            app:layout_scrollFlags="scroll|snap">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/detail_rl"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipChildren="false"
                 app:layout_collapseMode="parallax">
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/main_vp"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="20dp"
-                    android:clipChildren="false" />
-            </LinearLayout>
+                    android:layout_height="140dp"
+                    android:layout_alignParentBottom="true">
+
+                    <ImageView
+                        android:id="@+id/detail_iv1"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="30dp" />
+
+                    <TextView
+                        android:id="@+id/detail_tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_20"
+                        android:layout_toRightOf="@+id/detail_iv1"
+                        android:text="name"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+            </RelativeLayout>
             <!--在折叠过程中位置发生偏移-->
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/main_toolbar"
+                android:id="@+id/detail_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin">
@@ -48,7 +62,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_rv"
+        android:id="@+id/detail_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/margin_10"
@@ -56,20 +70,5 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/main_fab"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:fabCustomSize="50dp"
-        app:layout_anchorGravity="bottom"
-        android:layout_margin="@dimen/margin_20"
-        app:layout_anchor="@id/main_appBar"
-        android:src="@drawable/yuyin"
-        app:borderWidth="0dp"
-        android:backgroundTint="@color/white"
-        android:clickable="true"
-        />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

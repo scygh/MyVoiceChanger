@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,12 +24,12 @@ import butterknife.ButterKnife;
  * email : 1797484636@qq.com
  * date : 2020/3/23 09:15
  */
-public class MainRvAdapter extends RecyclerView.Adapter<MainRvAdapter.ViewHolder> {
+public class DetailRvAdapter extends RecyclerView.Adapter<DetailRvAdapter.ViewHolder> {
 
     private List<MainRvBean> mainRvBeans;
     private Context context;
 
-    public MainRvAdapter(List<MainRvBean> mainRvBeans, Context context) {
+    public DetailRvAdapter(List<MainRvBean> mainRvBeans, Context context) {
         this.mainRvBeans = mainRvBeans;
         this.context = context;
     }

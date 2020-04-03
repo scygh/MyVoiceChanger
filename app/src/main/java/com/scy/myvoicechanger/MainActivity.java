@@ -14,18 +14,20 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.scy.myvoicechanger.adapter.MainRvAdapter;
 import com.scy.myvoicechanger.adapter.MainVpAdapter;
 import com.scy.myvoicechanger.entity.MainRvBean;
 import com.scy.myvoicechanger.service.FloatWindowService;
+import com.scy.myvoicechanger.utils.AppBarStateChangeListener;
+import com.scy.myvoicechanger.utils.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +35,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.scy.myvoicechanger.utils.SpeechUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
 
     @BindView(R.id.main_rv)
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     CollapsingToolbarLayout mainCollapsingToolbar;
     @BindView(R.id.main_fab)
     FloatingActionButton mainFab;
+    @BindView(R.id.main_appBar)
+    AppBarLayout mainAppBar;
     private MainRvAdapter mainRvAdapter;
     private List<MainRvBean> mainRvBeans = new ArrayList<>();
     private int currentPosiotion = 1;
@@ -55,19 +58,36 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int HANDLER_WHAT_ONE = 1;
     private static final int REQUEST_CODE_ONE = 1;
-    SpeechUtils speechUtils;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+    public int layoutView() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initView() {
         setSupportActionBar(mainToolbar);
-        mainCollapsingToolbar.setTitle("使用方法");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mainAppBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                if (state == State.EXPANDED) {
+
+                } else if (state == State.COLLAPSED) {
+
+                } else {
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void initData() {
         initMainRv();
         initMainVp();
-        speechUtils = SpeechUtils.getInstance(getApplicationContext());
-        speechUtils.speakText("你好啊");
     }
+
 
     float startX = 0;
     float startY = 0;
@@ -139,29 +159,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void initMainRv() {
         mainRv.setLayoutManager(new GridLayoutManager(this, 3));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("甜甜女生", R.drawable.mainrv_item_wys2));
-        mainRvBeans.add(new MainRvBean("王者荣耀梦泪", R.drawable.mainrv_item_ml));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("王者荣耀梦泪", R.drawable.mainrv_item_ml));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("甜甜女生", R.drawable.mainrv_item_wys2));
-        mainRvBeans.add(new MainRvBean("王者荣耀梦泪", R.drawable.mainrv_item_ml));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("王者荣耀梦泪", R.drawable.mainrv_item_ml));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("甜甜女生", R.drawable.mainrv_item_wys2));
-        mainRvBeans.add(new MainRvBean("王者荣耀梦泪", R.drawable.mainrv_item_ml));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("一只网友酥", R.drawable.mainrv_item_wys));
-        mainRvBeans.add(new MainRvBean("王者荣耀梦泪", R.drawable.mainrv_item_ml));
-        mainRvBeans.add(new MainRvBean("王者荣耀梦泪", R.drawable.mainrv_item_ml));
+        mainRvBeans.add(new MainRvBean("卢本伟", R.drawable.lbw));
+        mainRvBeans.add(new MainRvBean("李云龙", R.drawable.lyl));
+        mainRvBeans.add(new MainRvBean("呆妹儿", R.drawable.dm));
         mainRvAdapter = new MainRvAdapter(mainRvBeans, this);
+        mainRv.addItemDecoration(new GridSpacingItemDecoration(3, 50, false));
+        mainRvAdapter.setOnItemClickListener(new MainRvAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(MainActivity.this, VoiceDetailActivity.class);
+                intent.putExtra("name", mainRvBeans.get(position).getName());
+                intent.putExtra("imageid", mainRvBeans.get(position).getImageId());
+                startActivity(intent);
+            }
+        });
         mainRv.setAdapter(mainRvAdapter);
     }
 
@@ -192,17 +203,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
-        speechUtils.shotdown();
     }
 
     @OnClick(R.id.main_fab)
     public void onViewClicked(View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.main_fab:
                 Intent intent = new Intent(this, FloatWindowService.class);
                 startService(intent);
                 finish();
                 break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
