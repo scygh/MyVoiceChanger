@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="girl">
+        <item>你过来你过来诱惑一下他 我来打他</item>
+        <item>可以可以</item>
+        <item>可以啊小哥哥你这么厉害的吗</item>
+        <item>哥哥别杀</item>
+        <item>喂能听到吗 哈喽 喂喂</item>
+        <item>小哥哥 我这里好多人啊</item>
+        <item>我们去干他</item>
+        <item>我现在技术很强的</item>
+        <item>爱你么么哒</item>
+        <item>骂挂壁</item>
+    </string-array>
+
+    <string-array name="lbw">
+        <item>五五开骂人</item>
+        <item>伞兵一号</item>
+        <item>伞兵三号</item>
+        <item>伞兵二号</item>
+        <item>伞兵四号</item>
+        <item>可以不跟你多比比</item>
+        <item>没有开挂</item>
+        <item>牛逼啊这个人有操作的啊</item>
+        <item>诶嘿听得见我说话吗 飞机上</item>
+        <item>这把吃不了鸡水泥封bi</item>
+    </string-array>
+
+    <string-array name="lyl">
+        <item>二营长 你他娘的意大利炮你 给老子啦出来</item>
+        <item>什么他娘的精锐啊 老子打的就是精锐</item>
+        <item>他娘的 老子他妈突突了这帮狗日的</item>
+        <item>你他娘的 你个败家子 你怎么不省着点用</item>
+        <item>你可真行 啊</item>
+        <item>你吓唬谁啊</item>
+        <item>全体上刺刀 准备进攻</item>
+        <item>哈哈哈 老天有眼</item>
+        <item>开炮！！！</item>
+        <item>想跑 门都没有</item>
+        <item>放屁</item>
+        <item>柱子 你他娘的打歪了</item>
+        <item>等仗打完 我赏你半斤地瓜烧</item>
+        <item>给老子闭嘴</item>
+    </string-array>
+
+    <string-array name="pdd">
+        <item>不用你拿你拿我就这个可以了兄弟</item>
+        <item>可以我来了兄弟</item>
+        <item>呀，有个人退了</item>
+        <item>对机场嘛走嘛走嘛</item>
+        <item>感觉这个人特别渔夫</item>
+        <item>我打你妈卖花儿</item>
+        <item>我日你的妈呀，兄弟</item>
+        <item>救我救我救我</item>
+        <item>有没有急救包给我一个兄弟</item>
+        <item>机场诶兄弟，你自求多福好吧兄弟</item>
+        <item>牛皮兄弟可以</item>
+        <item>芽儿哦好卡哦</item>
+        <item>芽儿来人了</item>
+        <item>诶有人有人有人</item>
+    </string-array>
+
+    <string-array name="qgwl">
+        <item>你好</item>
+        <item>做生意又不会做</item>
+        <item>去KTV玩啊</item>
+        <item>打工这方面</item>
+        <item>没有钱啦肯定要做啦不做没有钱用</item>
+        <item>维持的了生活</item>
+    </string-array>
+
+    <string-array name="qz">
+        <item>GNM小声</item>
+        <item>nice我操</item>
+        <item>你们这群彩笔</item>
+        <item>哈哈哈哈哈哈</item>
+        <item>我不打了都，心态崩了</item>
+        <item>我自闭了</item>
+        <item>手感来了（放屁）</item>
+        <item>捡狙</item>
+        <item>有实力很膨胀</item>
+        <item>烟都不封打鸡儿都</item>
+        <item>牛逼牛逼我操了都</item>
+        <item>这把这样打</item>
+        <item>那个少年他回来了</item>
+    </string-array>
+
+    <string-array name="ys">
+        <item>休想</item>
+        <item>你好</item>
+        <item>你竟变成了这样</item>
+        <item>决斗</item>
+        <item>削铁如泥</item>
+        <item>前进</item>
+        <item>发现敌人</item>
+        <item>可恶</item>
+        <item>哈哈哈哈哈</item>
+        <item>在这集合</item>
+        <item>复仇只会葬送你自己</item>
+        <item>大招</item>
+        <item>守住</item>
+        <item>很好</item>
+        <item>惨叫</item>
+        <item>我上了</item>
+        <item>我会了结这一切</item>
+        <item>我的武士之魂在燃烧</item>
+        <item>我的错</item>
+        <item>推进</item>
+        <item>放马过来</item>
+        <item>死到临头</item>
+        <item>漂亮一击</item>
+        <item>谢谢你</item>
+        <item>跟得上我吗</item>
+        <item>阿里阿头有</item>
+        <item>需要治疗</item>
+        <item>马上就来</item>
+    </string-array>
+</resources>

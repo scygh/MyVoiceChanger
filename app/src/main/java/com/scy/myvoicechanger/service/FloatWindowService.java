@@ -68,7 +68,7 @@ public class FloatWindowService extends Service {
 
     /*private boolean isHome() {
         ActivityManager mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningTaskInfo> rti = mActivityManager.getRunningTasks(1);
+        List<ActivityManager.RunningTaskInfo> rti = mActivityManager.getRunningTasks(softuseway);
         return getHomes().contains(rti.get(0).topActivity.getPackageName());
     }
 */

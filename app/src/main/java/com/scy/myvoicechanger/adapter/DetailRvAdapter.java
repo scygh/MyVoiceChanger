@@ -4,14 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scy.myvoicechanger.R;
-import com.scy.myvoicechanger.entity.MainRvBean;
 
 import java.util.List;
 
@@ -26,43 +24,40 @@ import butterknife.ButterKnife;
  */
 public class DetailRvAdapter extends RecyclerView.Adapter<DetailRvAdapter.ViewHolder> {
 
-    private List<MainRvBean> mainRvBeans;
+    private List<String> names;
     private Context context;
 
-    public DetailRvAdapter(List<MainRvBean> mainRvBeans, Context context) {
-        this.mainRvBeans = mainRvBeans;
+    public DetailRvAdapter(List<String> names, Context context) {
+        this.names = names;
         this.context = context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.rvitem_iv)
-        ImageView rvitemIv;
-        @BindView(R.id.rvitem_tv)
-        TextView rvitemTv;
+        @BindView(R.id.rvitem_num)
+        TextView rvitemNum;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-        }
-
-        public void bind(int position) {
-            rvitemIv.setImageResource(mainRvBeans.get(position).getImageId());
-            rvitemTv.setText(mainRvBeans.get(position).getName());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (onItemClickListener != null) {
-                        onItemClickListener.onItemClick(position);
+                        onItemClickListener.onItemClick(getAdapterPosition());
                     }
                 }
             });
+        }
+
+        public void bind(int position) {
+            rvitemNum.setText(position + 1 + ". " + names.get(position));
         }
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.main_rv_item, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.detail_rv_item, null);
         return new ViewHolder(view);
     }
 
@@ -73,7 +68,7 @@ public class DetailRvAdapter extends RecyclerView.Adapter<DetailRvAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mainRvBeans.size();
+        return names.size();
     }
 
     public interface OnItemClickListener {

@@ -2,19 +2,33 @@ package com.scy.myvoicechanger.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.scy.myvoicechanger.R;
+import com.scy.myvoicechanger.adapter.DetailFloatRvAdapter;
+import com.scy.myvoicechanger.entity.VoiceBean;
 import com.scy.myvoicechanger.service.FloatWindowService;
 import com.scy.myvoicechanger.service.MyWindowManager;
+import com.scy.myvoicechanger.utils.sql.MyOpenHelper;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * description ：
@@ -32,6 +46,9 @@ public class FloatWindowBigView extends LinearLayout {
     private float yInScreen;
     private float xInView;
     private float yInView;
+    private AssetFileDescriptor fileDescriptor;
+    List<VoiceBean> list = new ArrayList<>();
+    private MediaPlayer player;
 
     public FloatWindowBigView(Context context) {
         super(context);
@@ -40,8 +57,10 @@ public class FloatWindowBigView extends LinearLayout {
         View view = findViewById(R.id.big_window_layout);
         viewWidth = view.getLayoutParams().width;
         viewHeight = view.getLayoutParams().height;
-        Button close = (Button) findViewById(R.id.close);
-        Button back = (Button) findViewById(R.id.back);
+        ImageView close = findViewById(R.id.close);
+        ImageView back = findViewById(R.id.back);
+        RecyclerView recyclerView = findViewById(R.id.rv_floatwindow);
+        player = new MediaPlayer();
         close.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +79,52 @@ public class FloatWindowBigView extends LinearLayout {
                 MyWindowManager.createSmallWindow(context);
             }
         });
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        DetailFloatRvAdapter detailRvAdapter = new DetailFloatRvAdapter(getData(context), context);
+        detailRvAdapter.setOnItemClickListener(new DetailFloatRvAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                try {
+                    String name = list.get(position).getAuthor();
+                    if (name.equals("李云龙")) {
+                        fileDescriptor = context.getAssets().openFd("lyl/" + list.get(position).getName() + ".mp3");
+                    } else if (name.equals("呆妹儿")) {
+                        fileDescriptor = context.getAssets().openFd("girl/" + list.get(position).getName() + ".mp3");
+                    } else if (name.equals("卢本伟")) {
+                        fileDescriptor = context.getAssets().openFd("lbw/" + list.get(position).getName() + ".mp3");
+                    }
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                player = new MediaPlayer();
+                                player.setDataSource(fileDescriptor.getFileDescriptor(), fileDescriptor.getStartOffset(), fileDescriptor.getLength());
+                                player.prepare();
+                                player.start();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        recyclerView.setAdapter(detailRvAdapter);
+    }
 
+    private List<VoiceBean> getData(Context context) {
+        Cursor cursor = MyOpenHelper.getHelper(context.getApplicationContext()).getWritableDatabase().query("Voice", null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                VoiceBean voiceBean = new VoiceBean(cursor.getString(cursor.getColumnIndex("name")), cursor.getString(cursor.getColumnIndex("author")));
+                list.add(voiceBean);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
     }
 
     public void setParams(WindowManager.LayoutParams params) {

@@ -31,7 +31,7 @@
                     android:id="@+id/main_vp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="20dp"
+                    android:layout_margin="30dp"
                     android:clipChildren="false" />
             </LinearLayout>
             <!--在折叠过程中位置发生偏移-->

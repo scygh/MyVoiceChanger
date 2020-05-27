@@ -26,6 +26,7 @@ import com.scy.myvoicechanger.adapter.MainRvAdapter;
 import com.scy.myvoicechanger.adapter.MainVpAdapter;
 import com.scy.myvoicechanger.entity.MainRvBean;
 import com.scy.myvoicechanger.service.FloatWindowService;
+import com.scy.myvoicechanger.service.MyWindowManager;
 import com.scy.myvoicechanger.utils.AppBarStateChangeListener;
 import com.scy.myvoicechanger.utils.GridSpacingItemDecoration;
 
@@ -102,7 +103,7 @@ public class MainActivity extends BaseActivity {
         views.add(inflater.inflate(R.layout.mainvp_item2, null, false));
         views.add(inflater.inflate(R.layout.mainvp_item3, null, false));
         views.add(inflater.inflate(R.layout.mainvp_item1, null, false));
-        mainVp.setPageMargin(20);
+        mainVp.setPageMargin(40);
         mainVp.setAdapter(new MainVpAdapter(views));
         mainVp.setCurrentItem(1, false);
         mainVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -142,11 +143,10 @@ public class MainActivity extends BaseActivity {
                         if (Math.abs(offsetX) <= 5) {
                             if (currentPosiotion == 1) {
                                 startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), REQUEST_CODE_ONE);
-                                Toast.makeText(MainActivity.this, "1", Toast.LENGTH_SHORT).show();
                             } else if (currentPosiotion == 2) {
-                                Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, CvActivity.class));
                             } else if (currentPosiotion == 3) {
-                                Toast.makeText(MainActivity.this, "3", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, UsewaysActivity.class));
                             }
                         }
                         break;
@@ -154,7 +154,7 @@ public class MainActivity extends BaseActivity {
                 return false;
             }
         });
-        handler.sendEmptyMessageDelayed(HANDLER_WHAT_ONE, 2000);
+        handler.sendEmptyMessageDelayed(HANDLER_WHAT_ONE, 5000);
     }
 
     private void initMainRv() {
@@ -162,6 +162,10 @@ public class MainActivity extends BaseActivity {
         mainRvBeans.add(new MainRvBean("卢本伟", R.drawable.lbw));
         mainRvBeans.add(new MainRvBean("李云龙", R.drawable.lyl));
         mainRvBeans.add(new MainRvBean("呆妹儿", R.drawable.dm));
+        mainRvBeans.add(new MainRvBean("pdd", R.drawable.pdd));
+        mainRvBeans.add(new MainRvBean("窃格瓦拉", R.drawable.qgwl));
+        mainRvBeans.add(new MainRvBean("茄子", R.drawable.qz));
+        mainRvBeans.add(new MainRvBean("源氏", R.drawable.ys));
         mainRvAdapter = new MainRvAdapter(mainRvBeans, this);
         mainRv.addItemDecoration(new GridSpacingItemDecoration(3, 50, false));
         mainRvAdapter.setOnItemClickListener(new MainRvAdapter.OnItemClickListener() {
@@ -183,7 +187,7 @@ public class MainActivity extends BaseActivity {
             switch (msg.what) {
                 case HANDLER_WHAT_ONE:
                     mainVp.setCurrentItem(currentPosiotion++);
-                    handler.sendEmptyMessageDelayed(HANDLER_WHAT_ONE, 2000);
+                    handler.sendEmptyMessageDelayed(HANDLER_WHAT_ONE, 5000);
                     break;
             }
         }
@@ -217,9 +221,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    protected void onStart() {
+        MyWindowManager.isWindowShowing();
+        MyWindowManager.removeBigWindow(this);
+        MyWindowManager.removeSmallWindow(this);
+        Intent intent = new Intent(this, FloatWindowService.class);
+        stopService(intent);
+        super.onStart();
     }
 }
