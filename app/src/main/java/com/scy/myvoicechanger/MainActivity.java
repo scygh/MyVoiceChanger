@@ -166,6 +166,13 @@ public class MainActivity extends BaseActivity {
         mainRvBeans.add(new MainRvBean("窃格瓦拉", R.drawable.qgwl));
         mainRvBeans.add(new MainRvBean("茄子", R.drawable.qz));
         mainRvBeans.add(new MainRvBean("源氏", R.drawable.ys));
+        mainRvBeans.add(new MainRvBean("麦克雷", R.drawable.maikelei));
+        mainRvBeans.add(new MainRvBean("渣渣辉", R.drawable.zzh));
+        mainRvBeans.add(new MainRvBean("古天乐", R.drawable.gtl));
+        mainRvBeans.add(new MainRvBean("陈小春", R.drawable.cxc));
+        mainRvBeans.add(new MainRvBean("萌妹子", R.drawable.mmz));
+        mainRvBeans.add(new MainRvBean("大笑", R.drawable.laugh));
+        mainRvBeans.add(new MainRvBean("王者荣耀", R.drawable.wzyy));
         mainRvAdapter = new MainRvAdapter(mainRvBeans, this);
         mainRv.addItemDecoration(new GridSpacingItemDecoration(3, 50, false));
         mainRvAdapter.setOnItemClickListener(new MainRvAdapter.OnItemClickListener() {

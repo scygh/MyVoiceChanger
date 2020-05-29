@@ -47,6 +47,15 @@ public class DetailRvAdapter extends RecyclerView.Adapter<DetailRvAdapter.ViewHo
                     }
                 }
             });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onItemLongClick(getAdapterPosition());
+                    }
+                    return false;
+                }
+            });
         }
 
         public void bind(int position) {
@@ -73,6 +82,7 @@ public class DetailRvAdapter extends RecyclerView.Adapter<DetailRvAdapter.ViewHo
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+        void onItemLongClick(int position);
     }
 
     private OnItemClickListener onItemClickListener;

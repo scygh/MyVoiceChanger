@@ -115,4 +115,115 @@
         <item>需要治疗</item>
         <item>马上就来</item>
     </string-array>
+
+    <string-array name="cxc">
+        <item>陈小春语音包</item>
+    </string-array>
+
+    <string-array name="gtl">
+        <item>古天乐语音包</item>
+    </string-array>
+
+    <string-array name="zzh">
+        <item>渣渣辉语音包</item>
+    </string-array>
+
+    <string-array name="laugh">
+        <item>八神笑声</item>
+        <item>周星驰笑声</item>
+        <item>喜剧片常用笑声</item>
+        <item>嘻嘻哈哈</item>
+        <item>大笑的声音</item>
+        <item>女人疯狂大笑</item>
+        <item>女精灵笑声</item>
+        <item>婴儿大笑</item>
+        <item>小人奸笑</item>
+        <item>捕鱼达人</item>
+        <item>无法忍住的大笑</item>
+        <item>破产姐妹笑声</item>
+        <item>突然大笑</item>
+        <item>美女笑声</item>
+        <item>魔力笑声</item>
+    </string-array>
+
+    <string-array name="maikelei">
+        <item>至少在某个地方，现在是正午</item>
+        <item>不是有句话说，过去的就让他过去吧。</item>
+        <item>交给我吧</item>
+        <item>他们在集合</item>
+        <item>你得在地上躺一会儿了</item>
+        <item>你得好好练练瞄准</item>
+        <item>六连</item>
+        <item>准备好了</item>
+        <item>午时已到</item>
+        <item>午时已到 - 长</item>
+        <item>呵，每次扯上列车总会倒霉</item>
+        <item>好了别动</item>
+        <item>姜还是老的辣</item>
+        <item>差点就交代在这了</item>
+        <item>忘记1</item>
+        <item>忘记2</item>
+        <item>总有提高的余地。</item>
+        <item>我也许不是好人，也不是坏人，但肯定不是小人。</item>
+        <item>我很荣幸</item>
+        <item>我欠你一个人情。</item>
+        <item>我虽然是个牛仔，在酒吧只点牛奶</item>
+        <item>排排站，吃子弹</item>
+        <item>有本事就来</item>
+        <item>脚步</item>
+        <item>腰带上的四个字母？凑近点儿看个仔细</item>
+    </string-array>
+
+    <string-array name="mmz">
+        <item>不是不能和你好好说话，是不能说好话</item>
+        <item>不要等人人都说你丑的时候，才发现自己真的丑</item>
+        <item>你怕是火锅吃多了，脑袋里进了火锅底料呦</item>
+        <item>你是喝敌敌畏长大的吗没有脑子</item>
+        <item>你是老年痴呆啊</item>
+        <item>你的智商就跟黑龙江的温度一样</item>
+        <item>你的脑子。离家出走了吧</item>
+        <item>你看你，长得跟闹着玩似的，三百六十度都是死角</item>
+        <item>你看看你那个摩擦系数这么大的脸</item>
+        <item>你简直就是人不要脸天下无敌</item>
+        <item>你脑子被猪拱了吗</item>
+        <item>你脖子以上都是瘫痪，你是个脑残</item>
+        <item>你这种人，在电视剧都活不过两集</item>
+        <item>你这长得，啧唉。，把脸当上跟个演员似的</item>
+        <item>哎呦呦呦，你牛逼，你第一，你在海里开飞机</item>
+        <item>哎哟，你智商无下限啊</item>
+        <item>哪来的野鸡啊，给自己加戏</item>
+        <item>唉唉，你没有挨过成功人士的打是吧。</item>
+        <item>唉，你是属黄瓜的吗欠拍啊</item>
+        <item>垃圾这个词已经不能形容你了</item>
+        <item>完了，完了。你也不理我，我成狗不理了.mp3</item>
+        <item>对于丑的人，细看是一种残忍.mp3</item>
+        <item>我只想骂人，不想骂你</item>
+        <item>我没说你不要脸，我说不要脸都是你这样的</item>
+        <item>我用锤子敲炸你的远古巨坟</item>
+        <item>方便的话,能请你去死一下吗</item>
+        <item>草船上借的不就是你嘛</item>
+        <item>要不要给你一巴掌让你清醒一点</item>
+    </string-array>
+
+    <string-array name="wzyy">
+        <item>1杀</item>
+        <item>2杀</item>
+        <item>3杀</item>
+        <item>4杀</item>
+        <item>5杀</item>
+        <item>优先攻击输出</item>
+        <item>保护我方输出</item>
+        <item>大家打开语音</item>
+        <item>小心草丛</item>
+        <item>拖住我偷塔</item>
+        <item>注意野区</item>
+        <item>注意保护后排</item>
+        <item>状态不好撤退</item>
+        <item>稳住我们能赢</item>
+        <item>连续击杀3次</item>
+        <item>连续击杀4次</item>
+        <item>连续击杀5次</item>
+        <item>连续击杀6次</item>
+        <item>连续击杀7次及以上(超神) 天下无双：Legendary</item>
+    </string-array>
 </resources>
